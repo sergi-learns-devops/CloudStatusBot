@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  cloud-status-bot:
+    build: .
+    container_name: cloud-status-bot
+    restart: unless-stopped
+    environment:
+      # Variables de entorno (se pueden sobreescribir)
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - CACHE_DURATION=${CACHE_DURATION:-300}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      # Montar archivo .env si existe
+      - ./.env:/app/.env:ro
+    networks:
+      - bot-network
+    # Health check para verificar que el bot esté funcionando
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('https://api.telegram.org')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  bot-network:
+    driver: bridge 
