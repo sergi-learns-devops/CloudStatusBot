@@ -1,0 +1,13 @@
+# Configuración del Bot de Telegram
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token_here
+
+# Configuración de caché (en segundos)
+CACHE_DURATION=300
+
+# URLs de las APIs de estado de los proveedores cloud
+AZURE_STATUS_URL=https://status.azure.com/en-us/status/
+GCP_STATUS_URL=https://status.cloud.google.com/
+AWS_STATUS_URL=https://status.aws.amazon.com/
+
+# Configuración de logging
+LOG_LEVEL=INFO 
