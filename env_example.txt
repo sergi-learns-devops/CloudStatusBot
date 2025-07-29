@@ -1,13 +1,24 @@
-# Configuración del Bot de Telegram
+# Token del bot de Telegram (obligatorio)
 TELEGRAM_BOT_TOKEN=your_telegram_bot_token_here
 
-# Configuración de caché (en segundos)
+# Configuración de caché (opcional, por defecto 300 segundos = 5 minutos)
 CACHE_DURATION=300
 
-# URLs de las APIs de estado de los proveedores cloud
+# Timeout para peticiones HTTP (opcional, por defecto 10 segundos)
+HTTP_TIMEOUT=10
+
+# Número máximo de reintentos para peticiones HTTP (opcional, por defecto 3)
+MAX_RETRIES=3
+
+# Nivel de logging (opcional, por defecto INFO)
+# Opciones: DEBUG, INFO, WARNING, ERROR
+LOG_LEVEL=INFO
+
+# Habilitar estadísticas del bot (opcional, por defecto true)
+# true = habilitado, false = deshabilitado
+ENABLE_STATISTICS=true
+
+# URLs de las APIs de estado (opcionales)
 AZURE_STATUS_URL=https://status.azure.com/en-us/status/
 GCP_STATUS_URL=https://status.cloud.google.com/
-AWS_STATUS_URL=https://status.aws.amazon.com/
-
-# Configuración de logging
-LOG_LEVEL=INFO 
+AWS_STATUS_URL=https://status.aws.amazon.com/ 
