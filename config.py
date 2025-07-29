@@ -13,6 +13,12 @@ class Config:
     # Duración del caché en segundos (5 minutos por defecto)
     CACHE_DURATION = int(os.getenv('CACHE_DURATION', 300))
     
+    # Timeout para peticiones HTTP (10 segundos por defecto)
+    HTTP_TIMEOUT = int(os.getenv('HTTP_TIMEOUT', 10))
+    
+    # Número máximo de reintentos para peticiones HTTP
+    MAX_RETRIES = int(os.getenv('MAX_RETRIES', 3))
+    
     # URLs de las APIs de estado
     AZURE_STATUS_URL = os.getenv('AZURE_STATUS_URL', 'https://status.azure.com/en-us/status/')
     GCP_STATUS_URL = os.getenv('GCP_STATUS_URL', 'https://status.cloud.google.com/')
@@ -20,6 +26,9 @@ class Config:
     
     # Nivel de logging
     LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
+    
+    # Configuración de estadísticas
+    ENABLE_STATISTICS = os.getenv('ENABLE_STATISTICS', 'true').lower() == 'true'
     
     # Headers para las peticiones HTTP
     HEADERS = {

@@ -1,0 +1,58 @@
+{
+  "total_commands": 24,
+  "commands_by_type": {
+    "start": 10,
+    "button_oci": 2,
+    "button_gcp": 2,
+    "button_azure": 1,
+    "button_aws": 1,
+    "button_stats": 4,
+    "button_daily_stats": 2,
+    "button_all": 1,
+    "button_back_to_main": 1
+  },
+  "uptime_start": "2025-07-29T15:32:03.133041",
+  "last_command": {
+    "command": "button_back_to_main",
+    "timestamp": "2025-07-29T15:40:45.352033",
+    "user_id": 587615862
+  },
+  "daily_stats": {
+    "2025-07-29": {
+      "total_commands": 24,
+      "commands_by_type": {
+        "start": 10,
+        "button_oci": 2,
+        "button_gcp": 2,
+        "button_azure": 1,
+        "button_aws": 1,
+        "button_stats": 4,
+        "button_daily_stats": 2,
+        "button_all": 1,
+        "button_back_to_main": 1
+      }
+    }
+  },
+  "provider_checks": {
+    "azure": {
+      "total": 1,
+      "success": 1,
+      "errors": 0
+    },
+    "gcp": {
+      "total": 2,
+      "success": 2,
+      "errors": 0
+    },
+    "aws": {
+      "total": 1,
+      "success": 1,
+      "errors": 0
+    },
+    "oci": {
+      "total": 2,
+      "success": 2,
+      "errors": 0
+    }
+  }
+}

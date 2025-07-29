@@ -1,243 +1,177 @@
 # 🤖 Bot de Estado de Servicios Cloud
 
-Un bot de Telegram que monitorea el estado actual de los principales proveedores de servicios cloud: **Azure**, **Google Cloud Platform (GCP)** y **Amazon Web Services (AWS)**.
+Un bot inteligente de Telegram para monitorear el estado de los principales proveedores cloud en tiempo real.
 
-## 🌟 Características
+## ✨ Características
 
-- **Monitoreo en tiempo real** del estado de servicios cloud
-- **Caché inteligente** para respuestas rápidas (5 minutos por defecto)
-- **Interfaz amigable** con emojis y botones inline
-- **Comandos específicos** para cada proveedor
-- **Logging detallado** para debugging
-- **Configuración flexible** mediante variables de entorno
+### 🌐 Monitoreo en Tiempo Real
+- **Azure** - Microsoft Cloud Services
+- **GCP** - Google Cloud Platform
+- **AWS** - Amazon Web Services
+- **OCI** - Oracle Cloud Infrastructure
 
-## 📋 Requisitos
+### 📊 Estadísticas Avanzadas
+- Contador de comandos ejecutados
+- Estadísticas por tipo de comando
+- Tiempo de actividad del bot
+- Tasa de éxito por proveedor
+- Estadísticas diarias de uso
 
-- Python 3.8 o superior
-- Token de bot de Telegram
-- Conexión a internet
+### ⚡ Rendimiento Optimizado
+- Sistema de caché inteligente con TTL configurable
+- Peticiones HTTP con reintentos automáticos
+- Ejecución paralela de verificaciones
+- Sesiones HTTP reutilizables
+- Timeouts configurables
+
+### 🎨 Interfaz Mejorada
+- Botones inline para navegación rápida
+- Emojis y formato visual atractivo
+- Mensajes informativos con resúmenes
+- Estados claros y fáciles de entender
 
 ## 🚀 Instalación
 
-### Opción A: Instalación Local (Recomendado para desarrollo)
+### Requisitos
+- Python 3.8+
+- Token de bot de Telegram
 
-1. **Clonar o descargar el proyecto:**
-   ```bash
-   cd BotCloud
-   ```
+### Pasos de instalación
 
-2. **Instalar dependencias:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+1. **Clonar el repositorio**
+```bash
+git clone <repository-url>
+cd BotCloud
+```
 
-3. **Configurar variables de entorno:**
-   ```bash
-   # Copiar el archivo de ejemplo
-   cp env_example.txt .env
-   
-   # Editar .env con tu token de bot
-   nano .env
-   ```
+2. **Instalar dependencias**
+```bash
+pip install -r requirements.txt
+```
 
-4. **Obtener token de bot de Telegram:**
-   
-   #### Guía paso a paso:
-   
-   1. **Abre Telegram** en tu teléfono o computadora
-   2. **Busca @BotFather** en la barra de búsqueda de Telegram
-   3. **Inicia una conversación** con BotFather haciendo clic en "Start"
-   4. **Envía el comando** `/newbot`
-   5. **Sigue las instrucciones**:
-      - **Nombre del bot**: Escribe un nombre para tu bot (ej: "Mi Bot de Estado Cloud")
-      - **Username del bot**: Escribe un nombre de usuario único que termine en "bot" (ej: "mi_estado_cloud_bot")
-   6. **Copia el token** que te envía BotFather
-   7. **Guarda el token** en un lugar seguro
-   
-   > 🔒 **Seguridad**: El token es como la contraseña de tu bot. Nunca lo compartas con nadie.
+3. **Configurar el bot**
+```bash
+# Copiar archivo de configuración
+copy env_example.txt .env
 
-### Opción B: Instalación con Docker (Recomendado para producción)
+# Editar configuración
+notepad .env
+```
 
-1. **Configurar el bot:**
-   ```bash
-   cp env_example.txt .env
-   nano .env  # Editar con tu token
-   ```
+4. **Configurar token de Telegram**
+Edita el archivo `.env` y añade tu token:
+```env
+TELEGRAM_BOT_TOKEN=tu_token_aqui
+```
 
-2. **Construir y ejecutar:**
-   ```bash
-   docker-compose up -d
-   ```
+5. **Ejecutar el bot**
+```bash
+python main.py
+```
 
-3. **Ver logs:**
-   ```bash
-   docker-compose logs -f
-   ```
+## 📋 Comandos Disponibles
 
-> 📖 **Ver [DOCKER.md](DOCKER.md) para instrucciones detalladas de Docker**
+### Comandos Principales
+- `/start` - Mensaje de bienvenida
+- `/status` - Estado general de todos los proveedores
+- `/help` - Mostrar ayuda
+- `/stats` - Estadísticas del bot
+
+### Comandos Específicos
+- `/azure` - Estado detallado de Azure
+- `/gcp` - Estado detallado de Google Cloud Platform
+- `/aws` - Estado detallado de Amazon Web Services
+- `/oci` - Estado detallado de Oracle Cloud Infrastructure
 
 ## ⚙️ Configuración
 
 ### Variables de Entorno
 
-| Variable | Descripción | Valor por defecto |
-|----------|-------------|-------------------|
-| `TELEGRAM_BOT_TOKEN` | Token de tu bot de Telegram | **Requerido** |
-| `CACHE_DURATION` | Duración del caché en segundos | `300` (5 minutos) |
-| `LOG_LEVEL` | Nivel de logging | `INFO` |
+| Variable | Descripción | Por Defecto |
+|----------|-------------|-------------|
+| `TELEGRAM_BOT_TOKEN` | Token del bot de Telegram | **Obligatorio** |
+| `CACHE_DURATION` | Duración del caché en segundos | 300 (5 min) |
+| `HTTP_TIMEOUT` | Timeout para peticiones HTTP | 10 segundos |
+| `MAX_RETRIES` | Reintentos para peticiones HTTP | 3 |
+| `LOG_LEVEL` | Nivel de logging | INFO |
+| `ENABLE_STATISTICS` | Habilitar estadísticas | true |
 
-### Ejemplo de archivo `.env`:
+### Ejemplo de configuración completa
 ```env
 TELEGRAM_BOT_TOKEN=1234567890:ABCdefGHIjklMNOpqrsTUVwxyz
 CACHE_DURATION=300
+HTTP_TIMEOUT=10
+MAX_RETRIES=3
 LOG_LEVEL=INFO
+ENABLE_STATISTICS=true
 ```
 
-## 🎯 Uso
+## 🔧 Características Técnicas
 
-### Ejecutar el bot:
-```bash
-python main.py
-```
+### Sistema de Caché
+- Caché por proveedor con TTL configurable
+- Evita peticiones innecesarias
+- Mejora el rendimiento y reduce latencia
 
-### Comandos disponibles:
+### Manejo de Errores
+- Reintentos automáticos con backoff exponencial
+- Múltiples fuentes de datos por proveedor
+- Fallback a estado operativo por defecto
 
-| Comando | Descripción |
-|---------|-------------|
-| `/start` | Mensaje de bienvenida y botones |
-| `/help` | Mostrar ayuda y comandos disponibles |
-| `/status` | Estado general de todos los proveedores |
-| `/azure` | Estado específico de Azure |
-| `/gcp` | Estado específico de Google Cloud |
-| `/aws` | Estado específico de AWS |
+### Estadísticas
+- Registro automático de comandos
+- Métricas de rendimiento por proveedor
+- Estadísticas diarias y resúmenes
 
-### Interfaz de botones:
-El bot también incluye botones inline para navegación rápida:
-- 🌐 Estado General
-- ☁️ Azure
-- ☁️ GCP
-- ☁️ AWS
+## 📈 Estados Posibles
 
-## 📊 Estados de Servicios
+- 🟢 **Operational** - Servicio funcionando normalmente
+- 🔴 **Issue** - Problema detectado
+- 🟡 **Investigating** - Investigando problema
+- ⚪ **Unknown** - Estado desconocido
 
-| Estado | Emoji | Descripción |
-|--------|-------|-------------|
-| Operational | 🟢 | Servicio funcionando normalmente |
-| Issue | 🔴 | Problema detectado |
-| Investigating | 🟡 | Investigando problema |
-| Unknown | ⚪ | Estado desconocido |
+## 🛠️ Desarrollo
 
-## 🏗️ Estructura del Proyecto
-
+### Estructura del Proyecto
 ```
 BotCloud/
 ├── main.py              # Punto de entrada principal
 ├── telegram_bot.py      # Lógica del bot de Telegram
-├── cloud_status.py      # Verificación de estado de servicios cloud
-├── config.py           # Configuración y variables de entorno
-├── requirements.txt    # Dependencias de Python
-├── env_example.txt     # Ejemplo de variables de entorno
-├── .gitignore          # Archivos a ignorar en Git
-├── .dockerignore       # Archivos a ignorar en Docker
-├── Dockerfile          # Configuración de Docker
-├── docker-compose.yml  # Orquestación de Docker
-├── test_bot.py         # Script de pruebas
-├── run.bat            # Script de ejecución para Windows
-├── run.sh             # Script de ejecución para Linux/Mac
-├── README.md          # Esta documentación
-├── DOCKER.md          # Guía de Docker
-├── INSTALACION_WINDOWS.md # Guía específica para Windows
-├── INICIO_RAPIDO.md   # Guía de inicio rápido
-└── CREAR_BOT_TELEGRAM.md # Guía para crear bot en Telegram
+├── cloud_status.py      # Verificación de estado cloud
+├── statistics.py        # Sistema de estadísticas
+├── config.py           # Configuración del bot
+├── requirements.txt    # Dependencias
+├── env_example.txt    # Ejemplo de configuración
+└── README.md          # Documentación
 ```
 
-## 🔒 Seguridad
+### Agregar Nuevos Proveedores
+Para agregar un nuevo proveedor:
 
-### Archivo .gitignore
-El proyecto incluye un archivo `.gitignore` que protege:
-- Archivos de configuración con tokens (`.env`)
-- Archivos de Python compilados (`__pycache__/`)
-- Entornos virtuales (`venv/`, `env/`)
-- Logs y archivos temporales
-- Credenciales y certificados
+1. Añadir método en `CloudStatusChecker`
+2. Implementar parser específico
+3. Actualizar comandos en `telegram_bot.py`
+4. Añadir botones en la interfaz
 
-### Protección de tokens
-- **Nunca** subas tu archivo `.env` a repositorios públicos
-- **Nunca** compartas tu token de Telegram
-- **Siempre** usa el archivo `.env` para configurar tokens
-- El archivo `env_example.txt` es seguro de subir (no contiene tokens reales)
+## 🤝 Contribuir
 
-## 🔧 Desarrollo
-
-### Agregar un nuevo proveedor:
-
-1. **Modificar `cloud_status.py`:**
-   - Agregar método `get_[provider]_status()`
-   - Implementar parser específico `_parse_[provider]_data()`
-
-2. **Actualizar `telegram_bot.py`:**
-   - Agregar comando `/[provider]`
-   - Actualizar botones inline
-
-3. **Actualizar documentación**
-
-### Ejemplo de implementación:
-```python
-async def get_new_provider_status(self) -> Dict:
-    """Obtener estado del nuevo proveedor"""
-    # Implementar lógica aquí
-    pass
-
-def _parse_new_provider_data(self, data: Dict) -> Dict:
-    """Parsear datos del nuevo proveedor"""
-    # Implementar parser aquí
-    pass
-```
-
-## 🐛 Troubleshooting
-
-### Error: "TELEGRAM_BOT_TOKEN es requerido"
-- Verifica que el archivo `.env` existe
-- Asegúrate de que `TELEGRAM_BOT_TOKEN` esté configurado correctamente
-
-### Error: "Error obteniendo el estado"
-- Verifica tu conexión a internet
-- Algunos proveedores pueden tener limitaciones de rate limiting
-- Revisa los logs para más detalles
-
-### El bot no responde
-- Verifica que el token sea válido
-- Asegúrate de que el bot esté iniciado correctamente
-- Revisa los logs para errores
-
-## 📝 Logs
-
-El bot genera logs detallados que incluyen:
-- Inicio y parada del bot
-- Errores de conexión
-- Uso de caché
-- Comandos recibidos
-
-Para cambiar el nivel de logging, modifica `LOG_LEVEL` en el archivo `.env`.
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Por favor:
 1. Fork el proyecto
-2. Crea una rama para tu feature
-3. Commit tus cambios
-4. Push a la rama
-5. Abre un Pull Request
+2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir un Pull Request
 
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
-## 🙏 Agradecimientos
+## 🆘 Soporte
 
-- [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) - Librería de Telegram
-- [aiohttp](https://github.com/aio-libs/aiohttp) - Cliente HTTP asíncrono
-- APIs oficiales de Azure, GCP y AWS para el estado de servicios
+Si tienes problemas:
+1. Verifica que Python esté instalado correctamente
+2. Asegúrate de que el token de Telegram sea válido
+3. Revisa los logs del bot para errores específicos
+4. Ejecuta `python test_bot.py` para diagnosticar
 
 ---
 
